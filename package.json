@@ -1,0 +1,25 @@
+{
+  "name": "ClimaApp-Node",
+  "version": "1.0.0",
+  "description": "Programa del clima creado con node y uso de apis publicas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuevinMartinezBotina/ClimaApp-Node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuevinMartinezBotina/ClimaApp-Node/issues"
+  },
+  "homepage": "https://github.com/QuevinMartinezBotina/ClimaApp-Node#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.2"
+  }
+}
