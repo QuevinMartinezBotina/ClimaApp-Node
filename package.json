@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/QuevinMartinezBotina/ClimaApp-Node#readme",
   "dependencies": {
+    "axios": "^0.26.1",
     "colors": "^1.4.0",
     "inquirer": "^8.2.2"
   }

@@ -9,31 +9,15 @@ const questions = [
     message: "¿Que desea hacer?", //?mensaje que se muestra
     choices: [
       {
-        value: "1", //?El valor de lo que se selecciona
-        name: `${"1".red}. Crear una tarea`, //?El mensaje que se muetra
+        value: 1, //?El valor de lo que se selecciona
+        name: `${"1".red}. Buscar ciudad`, //?El mensaje que se muetra
       },
       {
-        value: "2",
-        name: `${"2".red}. Listar tareas`,
+        value: 2,
+        name: `${"2".red}. Historial de busqueda`,
       },
       {
-        value: "3",
-        name: `${"3".red}. Listar tareas completadas`,
-      },
-      {
-        value: "4",
-        name: `${"4".red}. Listar tareas pendientes`,
-      },
-      {
-        value: "5",
-        name: `${"5".red}. Completar tarea(s)`,
-      },
-      {
-        value: "6",
-        name: `${"6".red}. Borrar tarea`,
-      },
-      {
-        value: "0",
+        value: 0,
         name: `${"0".red}. Salir`,
       },
     ],
