@@ -1,2 +1,0 @@
-MapBox_key = pk.eyJ1IjoibG9rZWRyb3giLCJhIjoiY2wxdjgwYWtwMDNucTNkcGkxbzNpMGxxcCJ9.OnDwnOqAPI-_aV14xIJoBw
-url = https://docs.mapbox.com/api/search/geocoding/

@@ -10,8 +10,7 @@ class Busquedas {
   //?Esto es la info de nuestro API con el cual nmos podemos conectar
   get paramsMapbox() {
     return {
-      access_token:
-        "pk.eyJ1IjoibG9rZWRyb3giLCJhIjoiY2wxdjN0Y3YyMHNpbjNjbnRmNHA3OGJjbCJ9.E8i7HBXMe23Dy5OVkk6LPg",
+      access_token: process.env.MAPBOX_KEY,
       limit: 5,
       language: "es",
     };
@@ -23,14 +22,17 @@ class Busquedas {
       //?peticion http para traer datos de la API
       const intance = axios.create({
         baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`, //?Esto es nuestro endpoint para traer datos
-        params: this.paramsMapbox, //?Esta es nuestra infod e acceso al API
+        params: this.paramsMapbox, //?Esta es nuestra info de acceso al API
       });
 
       const resp = await intance.get();
 
-      console.log(resp.data);
-
-      return []; //?Retornamos un arreglo
+      return resp.data.features.map((lugar) => ({
+        id: lugar.id,
+        nombre: lugar.place_name,
+        longitud: lugar.center[0],
+        latitud: lugar.center[1],
+      }));
     } catch (error) {
       return []; //?Retornamos un arreglo
     }
