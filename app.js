@@ -22,17 +22,20 @@ const main = async () => {
 
         //*Buscar los lugares
         const ciudades = await busquedas.ciudad(ciudad_busqueda);
+
+        //*Selecciona un lugar
         const ciudadSeleccionada = await listarCiudades(ciudades);
         const ciudadSelect = ciudades.find((l) => l.id === ciudadSeleccionada);
 
-        //*Selecciona un lugar
         //*Datos del clima
+
         //*Mostrar resultados
         console.log(`\nCiudad: ${ciudadSelect.nombre}`);
         console.log(`Latitud: : ${ciudadSelect.longitud}`);
         console.log(`Longitud: ${ciudadSelect.latitud}`);
         console.log(`Temperatura min: ${8}F`);
-        console.log(`Temperatura max: ${18}F\n`);
+        console.log(`Temperatura max: ${18}F`);
+        console.log(`Descripción: Nublado \n`);
         break;
       case 2: // Ver historial de busqueda
         console.log("hello world 2");
