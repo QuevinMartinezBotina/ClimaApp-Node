@@ -18,9 +18,9 @@ class Busquedas {
 
   get paramsOpenWather() {
     return {
-      access_token: process.env.OPENWEATHER_KEY,
+      appid: process.env.OPENWEATHER_KEY,
       units: "metric",
-      lang: "es",
+      lang: "es", //?Esto es nuestro endpoint para traer datos
     };
   }
 
@@ -50,26 +50,21 @@ class Busquedas {
     try {
       //*Intancia de axios
       //?peticion http para traer datos de la API
-      const intance = axios.create({
-        baseURL: `api.openweathermap.org/data/2.5/weather?`,
-        lat: latitud,
-        lon: longitud,
-        appid: "14cdb22c319a1da7f4f069b1923da211",
-        units: "metric",
-        lang: "es", //?Esto es nuestro endpoint para traer datos
-        //params: this.paramsOpenWather, //?Esta es nuestra info de acceso al API
+      const instance = axios.create({
+        baseURL: `https://api.openweathermap.org/data/2.5/weather`,
+        params: { ...this.paramsOpenWather, lat: latitud, lon: longitud },
       });
 
       //*Resp.data - los datos que sacamso del api
-      const resp = await intance.get();
-
+      const resp = await instance.get();
+      const { weather, main } = resp.data; //?Desestructramos para sacar los datos
       //*Retornamos los datos
-      return resp.data.features.map((ciudad) => ({
-        desc: ciudad.description,
-        min: ciudad.main.temp_min,
-        max: ciudad.main.temp_max,
-        temp: ciudad.temp,
-      }));
+      return {
+        desc: weather[0].description,
+        min: main.temp_min,
+        max: main.temp_max,
+        temp: main.temp,
+      };
     } catch (error) {
       console.log(error);
     }

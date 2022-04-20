@@ -28,14 +28,18 @@ const main = async () => {
         const ciudadSelect = ciudades.find((l) => l.id === ciudadSeleccionada);
 
         //*Datos del clima
+        const clima = await busquedas.climaCiudad(
+          ciudadSelect.longitud,
+          ciudadSelect.latitud
+        );
 
         //*Mostrar resultados
         console.log(`\nCiudad: ${ciudadSelect.nombre}`);
         console.log(`Latitud: : ${ciudadSelect.longitud}`);
         console.log(`Longitud: ${ciudadSelect.latitud}`);
-        console.log(`Temperatura min: ${8}F`);
-        console.log(`Temperatura max: ${18}F`);
-        console.log(`Descripción: Nublado \n`);
+        console.log(`Temperatura min: ${clima.min} C`);
+        console.log(`Temperatura max: ${clima.max} C`);
+        console.log(`Descripción: ${clima.desc} \n`);
         break;
       case 2: // Ver historial de busqueda
         console.log("hello world 2");
