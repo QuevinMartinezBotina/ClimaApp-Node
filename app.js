@@ -25,7 +25,10 @@ const main = async () => {
 
         //*Selecciona un lugar
         const ciudadSeleccionada = await listarCiudades(ciudades);
+        if (ciudadSeleccionada === "0") continue;
         const ciudadSelect = ciudades.find((l) => l.id === ciudadSeleccionada);
+        //*Guardar en DB
+        busquedas.agregarHistorial(ciudadSelect.nombre);
 
         //*Datos del clima
         const clima = await busquedas.climaCiudad(
@@ -42,7 +45,12 @@ const main = async () => {
         console.log(`Descripción: ${clima.desc} \n`);
         break;
       case 2: // Ver historial de busqueda
-        console.log("hello world 2");
+        const data = busquedas.leerDB();
+        //console.log(data.historial);
+        data.historial.forEach((lugar, i) => {
+          const idx = `${++i}. `.green;
+          console.log(`${idx} ${lugar}`);
+        });
         break;
 
       default:

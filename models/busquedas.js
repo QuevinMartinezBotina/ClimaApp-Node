@@ -1,10 +1,18 @@
-const axios = require("axios");
+const fs = require("fs");
 
+const axios = require("axios");
 class Busquedas {
-  historial = ["Bogota", "madrid", "New York"];
+  historial = [];
+  archivoDB = "./db/database.json";
 
   constructor() {
     //todo: leer DB si existe
+    this.leerDB();
+  }
+
+  get historialCapitalizado() {
+    //todo: capitalizar cada palabra
+    return this.historial;
   }
 
   //?Esto es la info de nuestro API con el cual nmos podemos conectar
@@ -46,6 +54,7 @@ class Busquedas {
     }
   }
 
+  //*Aqui buscamos los datos del clima en base a al longitud y latitud
   async climaCiudad(longitud, latitud) {
     try {
       //*Intancia de axios
@@ -68,6 +77,39 @@ class Busquedas {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  agregarHistorial(lugar = "") {
+    //todo: Preveenir duplicidad
+    if (this.historial.includes(lugar.toLocaleLowerCase())) {
+      return;
+    }
+    this.historial.unshift(lugar.toLocaleLowerCase());
+
+    //todo: Grabar en DB (Archivo json)
+    this.guardarDB();
+  }
+  guardarDB() {
+    const payload = {
+      historial: this.historial,
+    };
+
+    fs.writeFileSync(this.archivoDB, JSON.stringify(payload));
+  }
+  leerDB() {
+    //?Verificamos que el arhivo que se creo como DB no existe
+    if (!fs.existsSync(this.archivoDB)) {
+      console.log(`Not exist info in Data Base`.rainbow);
+      return null;
+    }
+
+    //?recuperamos esos datos ahora que sabemso que existe el archivo
+    const infoDB = fs.readFileSync(this.archivoDB, { encoding: "utf-8" }); //?Aqí hacemos un converción de string a objeto
+    const data = JSON.parse(infoDB);
+
+    //this.historial = { ...historial };
+    //console.log(data);
+    return data;
   }
 }
 
