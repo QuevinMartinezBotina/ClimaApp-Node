@@ -45,9 +45,7 @@ const main = async () => {
         console.log(`Descripción: ${clima.desc} \n`);
         break;
       case 2: // Ver historial de busqueda
-        const data = busquedas.leerDB();
-        //console.log(data.historial);
-        data.historial.forEach((lugar, i) => {
+        busquedas.historialCapitalizado.forEach((lugar, i) => {
           const idx = `${++i}. `.green;
           console.log(`${idx} ${lugar}`);
         });

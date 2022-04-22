@@ -12,7 +12,12 @@ class Busquedas {
 
   get historialCapitalizado() {
     //todo: capitalizar cada palabra
-    return this.historial;
+    return this.historial.map((lugar, i) => {
+      let palabras = lugar.split(" ");
+      palabras = palabras.map((p) => p[0].toUpperCase() + p.substring(1));
+
+      return palabras.join(" ");
+    });
   }
 
   //?Esto es la info de nuestro API con el cual nmos podemos conectar
@@ -84,7 +89,10 @@ class Busquedas {
     if (this.historial.includes(lugar.toLocaleLowerCase())) {
       return;
     }
-    this.historial.unshift(lugar.toLocaleLowerCase());
+
+    this.historial = this.historial.splice(0, 5); //?Aqui limitamos a 5 la cantidad de datos en nuestro objeto
+
+    this.historial.unshift(lugar.toLocaleLowerCase()); //?Agregamos al frente la nueva ciudad y lo ponemso en minusculas
 
     //todo: Grabar en DB (Archivo json)
     this.guardarDB();
@@ -107,8 +115,7 @@ class Busquedas {
     const infoDB = fs.readFileSync(this.archivoDB, { encoding: "utf-8" }); //?Aqí hacemos un converción de string a objeto
     const data = JSON.parse(infoDB);
 
-    //this.historial = { ...historial };
-    //console.log(data);
+    this.historial = data.historial; //?Aqui mandamos nuestro objeto "historial" que esta dentro de nuestro arreglo
     return data;
   }
 }
